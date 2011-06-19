@@ -42,7 +42,7 @@ def login():
     usrName = raw_input('your login name: ')
 
 def getUsrData():
-    file_object = open('usrData.txt')
+    file_object = open('usrData')
     try:
         usrData = file_object.read().replace('\n', '').split('#')
     finally:

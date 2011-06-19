@@ -1,5 +1,5 @@
 from getchar import *
-from plotDraw import *
+from plot import *
 from usrOperate import *
 import os
 

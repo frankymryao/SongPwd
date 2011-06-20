@@ -55,6 +55,8 @@ def addSN(SN_data):
     for i in range(0, len(SN_data)):
         plotData.append([i + 1, atof(SN_data[i])])
     return(plotData)
+
+
 if __name__ == '__main__':
     can = canvas.default_canvas()
     name, times, pwd = getUsrData()

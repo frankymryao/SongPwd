@@ -58,7 +58,7 @@ def addSN(SN_data):
 if __name__ == '__main__':
     can = canvas.default_canvas()
     name, times, pwd = getUsrData()
-    x = canAttr(300, 200, 300000, 450000)
+    x = canAttr(300, 200, 300000, 4p50000)
     tData = [300000, 400000, 420000]
     plotDraw(can, x, pwd)
     plotDraw(can, x, tData)

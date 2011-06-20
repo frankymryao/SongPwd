@@ -1,8 +1,6 @@
 from pychart import *
 from usrOperate import *
-from getUsrData import *
 from string import *
-import os
 
 theme.get_options()
 
@@ -28,7 +26,7 @@ class canAttr:
 
 
 def plotDraw(can, canAttr, m_data):
-    min, max = simpleSort(m_data)
+    plotData = addSN(m_data)
     width = canAttr.getWidth()
     height = canAttr.getHeight()
     y_low = canAttr.getYLow()
@@ -38,16 +36,16 @@ def plotDraw(can, canAttr, m_data):
             y_range = (y_low, y_high),
             x_axis = axis.X(format = "%d", label = "times"),
             y_axis = axis.Y(format = "%d", label = "intervals(ns)"))
-    drawArea.add_plot(line_plot.T(data = m_data))
+    drawArea.add_plot(line_plot.T(data = plotData))
     drawArea.draw()
    # can.show(drawArea.x_pos(4), drawArea.y_pos(min), "/a45{}Intrvals")
 
 def simpleSort(data):
-    dataMin = data[0][1]
-    dataMax = data[0][1]
+    dataMin = data[0]
+    dataMax = data[0]
     for i in range(1, len(data)):
-        if data[i][1] < dataMin: dataMin = data[i][1]
-        if data[i][1] > dataMax: dataMax = data[i][1]
+        if data[i] < dataMin: dataMin = data[i]
+        if data[i] > dataMax: dataMax = data[i]
     return(dataMin, dataMax)
 
 def addSN(SN_data):
@@ -60,9 +58,7 @@ def addSN(SN_data):
 if __name__ == '__main__':
     can = canvas.default_canvas()
     name, times, pwd = getUsrData()
-    pData = addSN(pwd)
-    x = canAttr(300, 200, 300000, 900000)
-    print(x.getWidth(), x.getHeight())
-    tData = [ [1, 300000], [2, 400000], [3, 500000] ]
-    plotDraw(can, x, pData)
+    x = canAttr(300, 200, 300000, 450000)
+    tData = [300000, 400000, 420000]
+    plotDraw(can, x, pwd)
     plotDraw(can, x, tData)

@@ -27,31 +27,63 @@ def getPwd():
         timeInterval.append(timeDelta.seconds*pow(10, 7) + timeDelta.microseconds)
 
     return(timeInterval, intervalCount)
-    #timeInterval = [123], 333, ...]
+    #timeInterval = [123, 333, ...]
 
-def getUsrData():
-    file_object = open('usrData')
+def getUsrData(fileName):
+    usrDict = {}
+    file_object = open(fileName)
     try:
-        usrData = file_object.read().replace('\n', '').split('#')
-        name = usrData[0]
-        count = atoi(usrData[1])
+        data = file_object.readlines()
+        for i in range(0, len(data)):
+            usrName, usrData = data[i].split('|')
+            usrDict.setdefault(usrName, usrData.replace('\n', ''))
     finally:
         file_object.close()
-    pwd = usrData[2:len(usrData) - 1]
-    return((name, count, pwd))
+    return(usrDict)
+'''
+{'solo': '14#654977.0#400487.0#400797.0#401637.0#400527.0#400635.0#400291.0#400379.0#400388.0#400365.0#400567.0#401152.0#400395.0$',
+'franky': '11#401532.0#401186.0#400508.0#400604.0#491071.0#400425.0#400540.0#400599.0#455916.0#617675.0$'}
+'''
+
+def map2pwd(mapData):
+    temp = mapData.replace('$', '').split('#')
+    for i in range(0, len(temp)):
+        temp[i] = atof(temp[i])
+    return(temp[0], temp[1:len(temp)])
+
+def getCmpPwd(fileName):
+    usrMap = getUsrData(fileName)
+    file_object = open(fileName)
+    data = file_object.readline().split('|')
+    name = data[0]
+    pwd = usrMap.get(name)
+    pwd = map2pwd(pwd)
+    pwd = pwd[1:len(pwd)]
+    file_object.close()
+    return(pwd[0])
+
+    
 
 def register():
     usrName = raw_input('your name: ')
     print('your pwd, start and end with \'#\'')
-    usrPwd, count = getPwd()
-    file_object = open('usrData', 'ab')
-    file_object.write(usrName + '#' + str(count) + '#')
-    for i in range(0, len(usrPwd)):
+    usrPwd, usrCount = getPwd()
+    putPwd('usrData', usrName, usrCount, usrPwd)
+   
+def putPwd(fileName, usrName, usrCount, usrPwd):
+    file_object = open(fileName, 'ab')
+    file_object.write(usrName + '|' + str(usrCount) + '#')
+    for i in range(0, len(usrPwd) - 1):
         file_object.write(str(usrPwd[i]) + '#')
+    file_object.write(str(usrPwd[len(usrPwd) - 1]) + '$')
     file_object.write('\n')
     file_object.close()
+
 
 def login():
     usrName = raw_input('your login name: ')
 
+
+if __name__ == '__main__':
+    getUsrData('usrData')
     

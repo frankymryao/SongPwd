@@ -1,6 +1,7 @@
 from pychart import *
 from plot import *
 from string import *
+from usrOperate import *
 theme.get_options()
 
 def dualPlot(first_data, second_data):
@@ -25,6 +26,8 @@ def dualSort(first_data, second_data):
 
 
 if __name__ == '__main__':
-    a = [8, 6, 10, 12, 4]
-    b = [7, 5, 9, 6, 12]
-    dualPlot(a, b)
+    #get data from file and output the diagram
+    #1.get pwd
+    cmp1 = getCmpPwd('cmp1')
+    cmp2 = getCmpPwd('cmp2')
+    dualPlot(cmp1, cmp2)

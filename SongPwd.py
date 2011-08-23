@@ -1,3 +1,4 @@
+#! /usr/bin/python
 from pychart import *
 from getchar import *
 from plot import *
@@ -14,6 +15,7 @@ if x == 'L':
         print('no usr')
     libCount, libPwd = map2pwd(libPwd)
     print(libPwd)
+    print('input pwd');
     inputPwd, inputCount = getPwd()#get inputPwd
     print(inputPwd)
     if inputCount == libCount:

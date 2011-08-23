@@ -1,3 +1,5 @@
+#! /usr/bin/python
+
 from pychart import *
 from plot import *
 from string import *
@@ -24,6 +26,13 @@ def dualSort(first_data, second_data):
         max_data = max_second_data
     return(atof(min_data), atof(max_data))
 
+def simpleSort(data):
+    dataMin = data[0]
+    dataMax = data[0]
+    for i in range(1, len(data)):
+        if data[i] < dataMin: dataMin = data[i]
+        if data[i] > dataMax: dataMax = data[i]
+    return(dataMin, dataMax)
 
 if __name__ == '__main__':
     #get data from file and output the diagram

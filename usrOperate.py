@@ -1,3 +1,4 @@
+#! /usr/bin/python
 from getchar import *
 from datetime import *
 from math import pow
@@ -78,10 +79,6 @@ def putPwd(fileName, usrName, usrCount, usrPwd):
     file_object.write(str(usrPwd[len(usrPwd) - 1]) + '$')
     file_object.write('\n')
     file_object.close()
-
-
-def login():
-    usrName = raw_input('your login name: ')
 
 
 if __name__ == '__main__':

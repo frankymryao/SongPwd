@@ -105,7 +105,7 @@ if __name__ == '__main__':
 
     duration = round(endTime - startTime, 4)
     print 'Time Used: ' + str(duration)
-    file_object = open('forceBoomData', 'ab')
+    file_object = open('breakData', 'ab')
     file_object.write('PASSWORD: ' + pwdStr + '\n' + 'LENGTH: ' + str(length) + '\n' + 'Duration: ' + str(duration) + 's')
     file_object.write('\n' * 2)
     file_object.close()

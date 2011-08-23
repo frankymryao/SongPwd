@@ -33,7 +33,7 @@ def plotDraw(can, canAttr, m_data):
     y_high = canAttr.getYHigh()
     drawArea = area.T(size = (width, height), 
             legend = None,
-            y_range = (y_low, y_high),
+            y_range = (y_low*0.9, y_high),
             x_axis = axis.X(format = "%d", label = "times"),
             y_axis = axis.Y(format = "%d", label = "intervals(ns)"))
     drawArea.add_plot(line_plot.T(data = plotData))
@@ -57,7 +57,7 @@ def addSN(SN_data):
 
 if __name__ == '__main__':
     can = canvas.default_canvas()
-    name, times, pwd = getUsrData()
+    name, times, pwd = getUsrData("usrData")
     x = canAttr(300, 200, 300000, 450000)
     tData = [300000, 400000, 420000]
     plotDraw(can, x, pwd)
